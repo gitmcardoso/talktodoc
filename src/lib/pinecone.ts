@@ -9,7 +9,10 @@ import {
 import { getEmbeddings } from "./embeddings";
 import { convertToAscii } from "./utils";
 
-export const getPineconeClient = () => { return new Pinecone({ apiKey: process.env.PINECONE_API_KEY! }); };
+// Função para obter o cliente Pinecone
+export const getPineconeClient = () => {
+  return new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
+};
 
 type PDFPage = {
   pageContent: string;
@@ -19,28 +22,28 @@ type PDFPage = {
 };
 
 export async function loadS3IntoPinecone(fileKey: string) {
-  // 1. obtain the pdf -> downlaod and read from pdf
-  console.log("downloading s3 into file system");
-  const file_name = await downloadFromS3(fileKey);
-  if (!file_name) {
-    throw new Error("could not download from s3");
+  // 1. Obter o PDF -> Baixar e ler o PDF
+  console.log("Baixando o arquivo do S3 para o sistema de arquivos");
+  const fileName = await downloadFromS3(fileKey);
+  if (!fileName) {
+    throw new Error("Não foi possível baixar o arquivo do S3");
   }
-  console.log("loading pdf into memory" + file_name);
-  const loader = new PDFLoader(file_name);
+  console.log("Carregando PDF para a memória: " + fileName);
+  const loader = new PDFLoader(fileName);
   const pages = (await loader.load()) as PDFPage[];
 
-  // 2. split and segment the pdf
+  // 2. Dividir e segmentar o PDF
   const documents = await Promise.all(pages.map(prepareDocument));
 
-  // 3. vectorise and embed individual documents
+  // 3. Vetorizar e incorporar os documentos individuais
   const vectors = await Promise.all(documents.flat().map(embedDocument));
 
-  // 4. upload to pinecone
+  // 4. Fazer upload para o Pinecone
   const client = await getPineconeClient();
   const pineconeIndex = await client.index("talktodoc");
   const namespace = pineconeIndex.namespace(convertToAscii(fileKey));
 
-  console.log("inserting vectors into pinecone");
+  console.log("Inserindo vetores no Pinecone");
   await namespace.upsert(vectors);
 
   return documents[0];
@@ -60,20 +63,23 @@ async function embedDocument(doc: Document) {
       },
     } as PineconeRecord;
   } catch (error) {
-    console.log("error embedding document", error);
+    console.log("Erro ao incorporar o documento", error);
     throw error;
   }
 }
 
+// Função para truncar a string por bytes
 export const truncateStringByBytes = (str: string, bytes: number) => {
   const enc = new TextEncoder();
   return new TextDecoder("utf-8").decode(enc.encode(str).slice(0, bytes));
 };
 
+// Função para preparar o documento
 async function prepareDocument(page: PDFPage) {
   let { pageContent, metadata } = page;
   pageContent = pageContent.replace(/\n/g, "");
-  // split the docs
+
+  // Dividir os documentos
   const splitter = new RecursiveCharacterTextSplitter();
   const docs = await splitter.splitDocuments([
     new Document({

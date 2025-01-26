@@ -19,7 +19,7 @@ export async function getMatchesFromEmbeddings(
     });
     return queryResult.matches || [];
   } catch (error) {
-    console.log("error querying embeddings", error);
+    console.log("Erro ao consultar embeddings", error);
     throw error;
   }
 }
@@ -37,7 +37,8 @@ export async function getContext(query: string, fileKey: string) {
     pageNumber: number;
   };
 
-  let docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
-  // 5 vectors
+  const docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
+  
+  // Retorna os 3000 primeiros caracteres dos documentos qualificados
   return docs.join("\n").substring(0, 3000);
 }

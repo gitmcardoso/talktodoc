@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Message } from "ai/react";
-import { Loader2, Info, CheckCircle, HelpCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";  // Removido o Info, CheckCircle e HelpCircle, já que não estão sendo usados
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -45,35 +45,10 @@ Eu sou o seu assistente virtual 🤖 e estou aqui para te ajudar a explorar este
 
   if (!messages) return <></>;
 
-  // Função para renderizar os ícones personalizados como texto
-  const renderIcon = (icon: string) => {
-    switch (icon) {
-      case "checkCircle":
-        return `<CheckCircle class="inline w-4 h-4 text-green-600" />`;
-      case "info":
-        return `<Info class="inline w-4 h-4 text-blue-600" />`;
-      case "helpCircle":
-        return `<HelpCircle class="inline w-4 h-4 text-gray-600" />`;
-      default:
-        return icon;
-    }
-  };
-
-  // Função de substituição de conteúdo para ícones personalizados
-  const processContent = (content: string) => {
-    return content.replace(/<(\w+)>/g, (match, p1) => {
-      return renderIcon(p1); // Substitui a tag personalizada pela string do ícone
-    });
-  };
-
   // Função para renderizar conteúdo Markdown com componentes customizados
   const renderMarkdownWithIcons = (content: string) => {
     // Usando a função ReactMarkdown para renderizar o conteúdo final
-    return (
-      <ReactMarkdown>
-        {processContent(content)}
-      </ReactMarkdown>
-    );
+    return <ReactMarkdown>{content}</ReactMarkdown>;
   };
 
   return (
@@ -96,7 +71,7 @@ Eu sou o seu assistente virtual 🤖 e estou aqui para te ajudar a explorar este
                 }
               )}
             >
-              {/* Renderizando o conteúdo com Markdown e ícones embutidos */}
+              {/* Renderizando o conteúdo com Markdown */}
               {renderMarkdownWithIcons(message.content)}
             </div>
           </div>
