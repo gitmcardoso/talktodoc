@@ -27,10 +27,9 @@ const ChatComponent = ({ chatId }: Props) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
   const [isAssistantTyping, setIsAssistantTyping] = useState<boolean>(false); // Novo estado para controlar o status de digitação
-  const [assistantMessage, setAssistantMessage] = useState<string>(''); // Novo estado para armazenar a resposta do assistente
 
   // Use o useQuery para buscar as mensagens salvas
-  const { data, isLoading } = useQuery<Message[], Error>( {
+  const { data, isLoading } = useQuery<Message[], unknown>({
     queryKey: ['chat', chatId],
     queryFn: async () => {
       console.log('Buscando mensagens do chatId no back-end');
@@ -117,7 +116,6 @@ const ChatComponent = ({ chatId }: Props) => {
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit flex justify-center">
         <h3 className="text-xl font-bold">Chat</h3>
       </div>
-
 
       {/* Message list */}
       <div className="mb-10"> {/* Adiciona margem inferior à lista de mensagens */}

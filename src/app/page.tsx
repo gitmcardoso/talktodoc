@@ -6,7 +6,7 @@ import Link from "next/link";
 import { LogIn, FileText, MessageSquare, Bookmark, Clipboard, ArrowRight } from 'lucide-react';
 import FileUpload from "@/components/FileUpload";
 import { useEffect, useState } from 'react';
-import { FaComment, FaGraduationCap, FaBriefcase, FaHeartbeat, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import {  FaGraduationCap, FaBriefcase, FaHeartbeat, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import SubscriptionButton from "@/components/SubscriptionButton";

@@ -7,6 +7,10 @@ export async function GET(req: NextRequest) {  // Usando NextRequest
     const isPro = await checkSubscription(req); 
     return NextResponse.json({ isPro });
   } catch (error) {
-    return NextResponse.json({ error: "Error checking subscription" }, { status: 500 });
+    console.error("Error checking subscription:", error);  // Log do erro para fins de debug
+    return NextResponse.json(
+      { error: "Error checking subscription", details: error instanceof Error ? error.message : "Unknown error" }, 
+      { status: 500 }
+    );
   }
 }

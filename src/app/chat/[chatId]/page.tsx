@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"; // Importando NextRequest
-import { headers, cookies } from "next/headers"; // Para acessar cabeçalhos e cookies
+import { headers } from "next/headers"; // Para acessar cabeçalhos e cookies
 import { eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -9,26 +9,24 @@ import { chats } from "@/lib/db/schema";
 import ChatPageClient from "@/components/ChatPageClient";
 import { checkSubscription } from "@/lib/subscription";
 
+// Ajuste para compatibilidade com a nova estrutura de páginas no Next.js 13
 type Props = {
   params: {
-    chatId: string;
+    chatId: string; // O tipo é string porque params recebe strings
   };
 };
 
+// Página com parâmetros dinâmicos
 export default async function ChatPage({ params }: Props) {
   const { chatId } = params;
 
-  // Usar await para obter os headers corretamente
   const headersInstance = Object.fromEntries((await headers()).entries()); // Corrigido: Adicionado await para resolver a Promise
-  const cookiesInstance = cookies(); // Cookies já estão no formato correto para uso
 
   // Criando NextRequest manualmente
   const req = new NextRequest(new URL("/", process.env.NEXT_BASE_URL || "http://localhost"), {
     headers: headersInstance,
   });
-  
 
-  // Passando NextRequest para checkSubscription
   const isPro = await checkSubscription(req);
 
   const { userId } = await auth();

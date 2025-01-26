@@ -6,8 +6,18 @@ import ChatComponent from "@/components/ChatComponent";
 import { Menu, X } from "lucide-react";
 import PDFViewer from "./PDFViewer";
 
+// Definir o tipo correto para os objetos de chats
+interface Chat {
+  pdfUrl: string;
+  id: number;
+  pdfName: string;
+  createdAt: Date;
+  userId: string;
+  fileKey: string;
+}
+
 type Props = {
-  chats: any[];
+  chats: Chat[];  // Agora o tipo está correto
   chatId: number;
   pdfUrl: string;
   isPro: boolean; // Adicionado para mostrar botões de administração caso seja um administrador
@@ -16,7 +26,6 @@ type Props = {
 export default function ChatPageClient({ chats, chatId, pdfUrl, isPro }: Props) {
   const [isMobile, setIsMobile] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-
 
   // Detectar se o dispositivo é móvel
   useEffect(() => {

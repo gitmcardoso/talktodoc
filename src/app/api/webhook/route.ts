@@ -20,7 +20,8 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SIGNING_SECRET as string
     );
-  } catch (error) {
+  } catch {
+    // Se ocorrer um erro na construção do evento, retorna um erro 400
     return new NextResponse("webhook error", { status: 400 });
   }
 
