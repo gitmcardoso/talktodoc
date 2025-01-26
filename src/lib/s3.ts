@@ -1,6 +1,5 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'; // Importa os módulos necessários do SDK v3
 
-
 export async function uploadToS3(file: File) {
     try {
         // Configura o cliente do S3 com as credenciais e região
@@ -24,7 +23,7 @@ export async function uploadToS3(file: File) {
         const command = new PutObjectCommand(params);
 
         // Envia o arquivo para o S3
-        const data = await s3.send(command);
+        await s3.send(command); // Removido o uso da variável 'data', já que não era necessária
 
         console.log('Successfully uploaded to s3', file_key);
         

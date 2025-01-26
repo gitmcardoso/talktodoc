@@ -3,9 +3,8 @@ import { DrizzleChat } from '@/lib/db/schema'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
-import { MessageCircle, PlusCircle, Home, Search, Subscript } from 'lucide-react'
+import { MessageCircle, PlusCircle, Home, Search } from 'lucide-react' // Removido 'Subscript'
 import { cn } from '@/lib/utils'; // Ajuste para a localização correta
-import axios from 'axios'
 import SubscriptionButton from './SubscriptionButton'
 
 type Props = {
@@ -15,9 +14,6 @@ type Props = {
 }
 
 const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
-    const [loading, setLoading] = React.useState(false);
-
-
   return ( 
     <div className='w-full h-screen p-4 text-gray-200 bg-gray-900'>
         <Link href='/' >
@@ -56,7 +52,6 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
             </div>
             <div>
                 <SubscriptionButton isPro={isPro} />
-
             </div>
         </div>
     </div>
