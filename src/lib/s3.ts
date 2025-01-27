@@ -25,7 +25,6 @@ export async function uploadToS3(file: File) {
         // Envia o arquivo para o S3
         await s3.send(command); // Removido o uso da variável 'data', já que não era necessária
 
-        console.log('Successfully uploaded to s3', file_key);
         
         return Promise.resolve({
             file_key,

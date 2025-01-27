@@ -19,10 +19,8 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    console.log("Body recebido:", body);  // Verifique se o body está chegando
 
     const { file_key, file_name } = body;
-    console.log("Chave do arquivo:", file_key, "Nome do arquivo:", file_name);
 
     await loadS3IntoPinecone(file_key);
 
@@ -38,7 +36,6 @@ export async function POST(req: NextRequest) {
         insertedId: chats.id,
       });
 
-    console.log("ID do chat inserido:", chat_id[0].insertedId);
 
     return NextResponse.json(
       {

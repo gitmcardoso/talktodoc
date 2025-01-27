@@ -55,7 +55,6 @@ export default function Home() {
           throw new Error("Erro ao buscar o primeiro chat");
         }
         const data = await response.json();
-        console.log("Resposta da API /api/first-chat:", data);
         setFirstChat(data.firstChat);
       } catch (error) {
         console.error("Erro ao buscar o primeiro chat:", error);

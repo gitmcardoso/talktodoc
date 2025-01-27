@@ -7,14 +7,12 @@ export const runtime = "edge";
 
 export const POST = async (req: Request) => {
   const { chatId } = await req.json();
-  console.log("Recebendo chatId:", chatId);
 
   try {
     const _messages = await db
       .select()
       .from(messages)
       .where(eq(messages.chatId, chatId));
-    console.log("Mensagens encontradas no banco:", _messages);
 
     return NextResponse.json(_messages);
   } catch (error) {

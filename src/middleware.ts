@@ -4,9 +4,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/api/webhook', '/']);  // Inclua a rota "/" para a homepage
 
 export default clerkMiddleware(async (auth, request) => {
-  console.log('Verificando rota:', request.url);  // Exibe a URL da rota sendo acessada
   if (!isPublicRoute(request)) {
-    console.log('Rota privada, protegendo...');
     await auth.protect();  // Protege as rotas privadas
   } else {
     console.log('Rota pública, liberada.');

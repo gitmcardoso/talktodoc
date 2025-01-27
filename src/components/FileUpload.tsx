@@ -18,12 +18,9 @@ const FileUpload = () => {
   React.useEffect(() => {
     const fetchUserData = async () => {
       try {
-        console.log("Iniciando requisição para verificar plano e histórico de chats...");
         const response = await axios.get("/api/check"); // Verificar plano
         const chatsResponse = await axios.get("/api/user-chats"); // Verificar histórico de chats
         
-        console.log("Resposta da API de plano:", response);
-        console.log("Resposta da API de chats:", chatsResponse);
 
         if (response.status === 200) {
           setIsPro(response.data.isPro); // Define se o usuário tem plano Pro
@@ -56,12 +53,10 @@ const FileUpload = () => {
       file_name: string;
     }) => {
       try {
-        console.log("Iniciando criação de chat com arquivo:", file_name);
         const response = await axios.post("/api/create-chat", {
           file_key,
           file_name,
         });
-        console.log("Resposta da criação de chat:", response);
         return response.data;
       } catch (error) {
         console.error("Erro ao criar chat:", error);
@@ -83,7 +78,6 @@ const FileUpload = () => {
       }
 
       const file = acceptedFiles[0];
-      console.log("Arquivo recebido:", file);
       if (file.size > 10 * 1024 * 1024) {
         // Arquivo maior que 10MB
         toast.error("File too large");
@@ -92,9 +86,7 @@ const FileUpload = () => {
 
       try {
         setUploading(true);
-        console.log("Iniciando upload para o S3...");
         const data = await uploadToS3(file);
-        console.log("Resposta do upload:", data);
         
         if (!data?.file_key || !data.file_name) {
           toast.error("Something went wrong");

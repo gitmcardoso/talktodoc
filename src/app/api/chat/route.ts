@@ -52,7 +52,6 @@ export async function POST(req: Request) {
       ],
     });
 
-    console.log("Resposta da OpenAI:", response.choices[0].message.content); // Log da resposta da OpenAI
 
     const content = response.choices[0].message.content || ''; // Verifica se o conteúdo é nulo e substitui por uma string vazia
 

@@ -32,11 +32,9 @@ const ChatComponent = ({ chatId }: Props) => {
   const { data, isLoading } = useQuery<Message[], unknown>({
     queryKey: ['chat', chatId],
     queryFn: async () => {
-      console.log('Buscando mensagens do chatId no back-end');
       const response = await axios.post<Message[]>('/api/get-messages', {
         chatId,
       });
-      console.log('Resposta do servidor:', response.data);
 
       // Mapear 'system' para 'assistant' ou 'user'
       return response.data.map((msg) => ({

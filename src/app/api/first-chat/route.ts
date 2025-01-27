@@ -9,7 +9,6 @@ export async function GET() {
     const { userId } = await auth();
 
     // Log para depuração
-    console.log("userId:", userId);
 
     if (!userId) {
       return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
@@ -18,7 +17,6 @@ export async function GET() {
     const firstChatData = await db.select().from(chats).where(eq(chats.userId, userId));
 
     // Log para depuração
-    console.log("firstChatData:", firstChatData);
 
     if (firstChatData.length > 0) {
       return NextResponse.json({ firstChat: firstChatData[0] }, { status: 200 });

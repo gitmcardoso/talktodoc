@@ -18,11 +18,9 @@ export async function getEmbeddings(text: string) {
     const result = await response.json();
     
     // Log da resposta completa para depuração
-    console.log("OpenAI API Response:", result);
 
     // Verifica a estrutura da resposta
     if (result && result.data && result.data.length > 0) {
-      console.log("Embedding encontrado:", result.data[0].embedding);
       return result.data[0].embedding as number[];
     } else {
       console.error("Resposta sem embeddings:", result);
