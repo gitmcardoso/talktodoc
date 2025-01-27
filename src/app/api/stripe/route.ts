@@ -43,12 +43,12 @@ export async function GET() {
       line_items: [
         {
           price_data: {
-            currency: "USD",
+            currency: "BRL",
             product_data: {
               name: "TalkToDoc Pro",
-              description: "Unlimited PDF sessions!",
+              description: "PDFs Ilimitados!",
             },
-            unit_amount: 2000,
+            unit_amount: 3999,
             recurring: {
               interval: "month",
             },
