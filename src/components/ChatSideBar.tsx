@@ -46,7 +46,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
 
       {/* Área fixa inferior */}
       <div className='sticky bottom-0 border-t border-gray-700 bg-gray-900 z-10'>
-        <div className='p-6 flex flex-col gap-24'>
+        <div className='p-6 flex flex-col gap-4'>
             <div className='flex justify-between items-center text-sm text-slate-400'>
                 <Link href='/' className="flex items-center gap-2 hover:text-white flex-1 justify-center">
                     <Home className="w-4 h-4"/>
@@ -58,7 +58,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
                 </Link>
             </div>
             
-            <div className='w-full'>
+            <div className='w-full h-28'>
                 <SubscriptionButton isPro={isPro} />
             </div>
         </div>
