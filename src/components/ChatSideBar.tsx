@@ -15,8 +15,9 @@ type Props = {
 
 const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   return (
-    <div className='w-full h-screen flex flex-col justify-between bg-gray-900'>
-      <div className='p-4 overflow-y-auto'>
+    <div className='w-full h-screen flex flex-col bg-gray-900 overflow-hidden'>
+      {/* Área rolável principal */}
+      <div className='p-4 overflow-y-auto flex-1'>
         <Link href='/' className='block mb-4'>
             <Button className='w-full border-dashed border-white border'>
                 <PlusCircle className="mr-2 w-4 h-4"/>
@@ -43,20 +44,23 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
         </div>
       </div>
 
-      <div className='p-7 border-t border-gray-700'>
-        <div className='flex flex-col gap-4'>
+      {/* Área fixa inferior */}
+      <div className='sticky bottom-0 border-t border-gray-700 bg-gray-900 z-10'>
+        <div className='p-6 flex flex-col gap-4'>
             <div className='flex justify-between items-center text-sm text-slate-400'>
-                <Link href='/' className="flex items-center gap-2 hover:text-white">
+                <Link href='/' className="flex items-center gap-2 hover:text-white flex-1 justify-center">
                     <Home className="w-4 h-4"/>
-                    <span>Home</span>
+                    <span className='hidden sm:inline'>Home</span>
                 </Link>
-                <Link href='/' className="flex items-center gap-2 hover:text-white">
+                <Link href='/' className="flex items-center gap-2 hover:text-white flex-1 justify-center">
                     <Search className="w-4 h-4"/>
-                    <span>Search</span>
+                    <span className='hidden sm:inline'>Search</span>
                 </Link>
             </div>
             
-            <SubscriptionButton isPro={isPro} />
+            <div className='w-full'>
+                <SubscriptionButton isPro={isPro} />
+            </div>
         </div>
       </div>
     </div>
