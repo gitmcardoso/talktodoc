@@ -20,9 +20,6 @@ const SubscriptionButton = (props: Props) => {
     }
   };
 
-  React.useEffect(() => {
-    console.log("isPro updated:", props.isPro);
-  }, [props.isPro]);
 
   return (
     <Button disabled={loading} onClick={handleSubscription} variant="outline"
