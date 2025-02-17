@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Providers from "@/components/Providers";
 import { Toaster } from "react-hot-toast";
-import { Analytics } from '@vercel/analytics/next';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +22,6 @@ export default function RootLayout({
       <Providers>
         <html lang="en">
           <body className={inter.className}>{children}
-            <Analytics />
             <Toaster />
           </body>
         </html>
