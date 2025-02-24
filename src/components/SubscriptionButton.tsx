@@ -21,7 +21,6 @@ const SubscriptionButton = (props: Props) => {
   };
 
   React.useEffect(() => {
-    console.log("isPro updated:", props.isPro);
   }, [props.isPro]);
   
   return (
