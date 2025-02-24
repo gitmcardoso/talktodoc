@@ -20,7 +20,10 @@ const SubscriptionButton = (props: Props) => {
     }
   };
 
-
+  React.useEffect(() => {
+    console.log("isPro updated:", props.isPro);
+  }, [props.isPro]);
+  
   return (
     <Button disabled={loading} onClick={handleSubscription} variant="outline"
     className="w-full bg-transparent border text-white border-[#DC2626] hover:bg-[#DC2626] hover:text-white transition-all duration-300 py-2">
